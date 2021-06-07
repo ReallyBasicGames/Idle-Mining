@@ -141,3 +141,23 @@
   padding: 30px 30px;
   transition: 0.3s;
 }
+
+
+.error-text {
+  color: red;
+
+}
+
+.item6 { grid-area: log;
+  width: 1000px;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding-left: 16px;
+  color: white;
+  text-align: left;
+  font-size: 16px;
+  transition: 0.3s;
+  -webkit-animation-duration: 10s;
+  animation-duration: 10s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
