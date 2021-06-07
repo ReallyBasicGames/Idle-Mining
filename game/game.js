@@ -2,10 +2,9 @@ let lastTimeUpdated = 0;
 let resourceDisplayElements = [];
 let miningButtonElements = [];
 
-
-
 function setup()
 {
+  if(getItem('globals')!= null) globals = getItem('globals');
   initExp();
   initMessages();
   logMessage("Welcome to Idle Mining!");

@@ -8,24 +8,109 @@ let tempDisplay;
 let mods = [];
 
 let removeModElement;
+let removeModInput;
 let errorElement;
+
+let homeScreenButton;
+let clearStorageButton;
 
 function setup()
 {
   if(location.href == "file:///home/me/Desktop/P5%20Offline/game/importMod.html") {
+    homeScreenButton = createButton("Back to Game");
+    homeScreenButton.class("ModButton");
+    homeScreenButton.parent("input");
+    homeScreenButton.mousePressed(home);
+    clearStorageButton = createButton("Clear Storage (Recommended)");
+    clearStorageButton.class("ModButton");
+    clearStorageButton.parent("input");
+    clearStorageButton.mousePressed(clearThisStorage);
+    createElement('a', '<br>').parent("input");
+    createElement('a', '<br>').parent("input");
     selectFileButton = createButton("LOAD MOD FROM COMPUTER");
     selectFileButton.mousePressed(getMod);
     selectFileButton.parent("input");
-    selectFileButton.class("ResearchButton");
+    selectFileButton.class("ModButton");
     errorElement = createElement('a', '');
     errorElement.class("error-text");
+    errorElement.parent("error");
+    createElement('a', '<br>').parent("input");
+    createElement('a', '<br>').parent("input");
+    removeModInput = createInput('').attribute('placeholder', '#');
+    removeModInput.parent("input");
+    removeModInput.attribute('type', 'number');
+    removeModInput.class("ModInputField");
+    removeModElement = createButton("DELETE EXSISTING MOD");
+    removeModElement.parent("input");
+    removeModElement.class("ModButton");
+    removeModElement.mousePressed(() => {
+      removeMod(removeModInput.value());
+    });
+
   }
 }
 
-function draw()
-{
-  if(location.href == "file:///home/me/Desktop/P5%20Offline/game/importMod.html") {
+function clearThisStorage() {
+  clearStorage();
+}
 
+function home()
+{
+  // store the local mods in the globals
+  try {
+    //console.log(globals);
+    for(var i = 0; i < mods.length; i++)
+    {
+      let currMod = mods[i];
+      //console.log(currMod);
+
+      // merge the resources
+      for(var r = 0; r < Object.keys(currMod.resources).length; r++) {
+        globals.resources[Object.keys(currMod.resources)[r]] = currMod.resources[Object.keys(currMod.resources)[r]];
+      }
+      // merge the production buildings
+      for(var p = 0; p < Object.keys(currMod.productionBuildings).length; p++) {
+        globals.productionBuildings[Object.keys(currMod.productionBuildings)[p]] = currMod.productionBuildings[Object.keys(currMod.productionBuildings)[p]];
+      }
+      // merge the harvesters
+      for(var h = 0; h < Object.keys(currMod.harvesters).length; h++) {
+        globals.harvesters[Object.keys(currMod.harvesters)[h]] = currMod.harvesters[Object.keys(currMod.harvesters)[h]];
+      }
+      // merge the auto-production buildings
+      for(var a = 0; a < Object.keys(currMod.auto_production).length; a++) {
+        globals.auto_production[Object.keys(currMod.auto_production)[a]] = currMod.auto_production[Object.keys(currMod.auto_production)[a]];
+      }
+    }
+    storeItem('globals', globals);
+    // go to game.html
+    location.href = "file:///home/me/Desktop/P5%20Offline/game/game.html";
+  } catch (e) {
+    errorElement.html("<b>Encountered an error while combining:<br>" + e + "</b>")
+  }
+
+
+}
+
+function removeMod(val)
+{
+  let newVal = val-1;
+  if(newVal < 0 || newVal >= mods.length) {
+    errorElement.html("Index out of bounds.");
+    return;
+  }
+  mods.splice(newVal, newVal+1);
+  displayElements[newVal].remove();
+  displayElements.splice(newVal, newVal+1);
+}
+
+function draw() {
+  if(mods.length <= 0) {
+    removeModElement.attribute('disabled', '');
+    removeModInput.attribute('disabled', '');
+  }
+  else {
+    removeModElement.removeAttribute('disabled');
+    removeModInput.removeAttribute('disabled');
   }
 }
 
