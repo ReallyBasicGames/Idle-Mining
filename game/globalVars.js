@@ -10,7 +10,7 @@ let defaultItems =  {
     "ResearchPoints": 0
   },
   "resources": {
-
+    
   },
   "productionBuildings": {
 
