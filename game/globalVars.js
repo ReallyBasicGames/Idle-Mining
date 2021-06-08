@@ -1,4 +1,5 @@
-let globals =  {
+let globals;
+let defaultItems =  {
   "researchUnlocked": false,
   "clickMulti": 1,
   "pickaxeLevel": 1,

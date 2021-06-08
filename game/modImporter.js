@@ -17,11 +17,13 @@ let clearStorageButton;
 function setup()
 {
   if(location.href == "file:///home/me/Desktop/P5%20Offline/game/importMod.html") {
-    homeScreenButton = createButton("Back to Game");
+    if(getItem('globals')!= null) globals = getItem('globals');
+    if(getItem('mods')!= null) mods = getItem('mods');
+    homeScreenButton = createButton("Exit to Game");
     homeScreenButton.class("ModButton");
     homeScreenButton.parent("input");
     homeScreenButton.mousePressed(home);
-    clearStorageButton = createButton("Clear Storage (Recommended)");
+    clearStorageButton = createButton("Clear Storage (Recommended if mod is loaded or removed)");
     clearStorageButton.class("ModButton");
     clearStorageButton.parent("input");
     clearStorageButton.mousePressed(clearThisStorage);
@@ -36,6 +38,8 @@ function setup()
     errorElement.parent("error");
     createElement('a', '<br>').parent("input");
     createElement('a', '<br>').parent("input");
+    createElement('a', 'Careful! If you remove a mod, you MUST clear your storage!').parent("input");
+    createElement('a', '<br>').parent("input");
     removeModInput = createInput('').attribute('placeholder', '#');
     removeModInput.parent("input");
     removeModInput.attribute('type', 'number');
@@ -46,12 +50,28 @@ function setup()
     removeModElement.mousePressed(() => {
       removeMod(removeModInput.value());
     });
+    reloadMods();
+  }
+}
 
+function reloadMods()
+{
+
+  for(var i = 0; i < mods.length; i++)
+  {
+    let disText = "<li>" + mods[i].modDetails.modName + " made by " + mods[i].modDetails.modAuthor + "<br>Mod Description: " + mods[mods.length-1].modDetails.modDiscription + "</li>";
+    displayElements.push(createElement('a', disText).id(mods[i].modDetails.modName).parent('mods'));
   }
 }
 
 function clearThisStorage() {
+  storeItem('globals', null);
+  storeItem('mods', null);
   clearStorage();
+  globals = defaultItems;
+  storeItem('globals', globals);
+  homeScreenButton.removeAttribute('disabled');
+  homeScreenButton.html("Exit to Game");
 }
 
 function home()
@@ -81,6 +101,7 @@ function home()
         globals.auto_production[Object.keys(currMod.auto_production)[a]] = currMod.auto_production[Object.keys(currMod.auto_production)[a]];
       }
     }
+    storeItem('mods', mods);
     storeItem('globals', globals);
     // go to game.html
     location.href = "file:///home/me/Desktop/P5%20Offline/game/game.html";
@@ -101,6 +122,8 @@ function removeMod(val)
   mods.splice(newVal, newVal+1);
   displayElements[newVal].remove();
   displayElements.splice(newVal, newVal+1);
+  homeScreenButton.attribute('disabled', ' ');
+  homeScreenButton.html("Must clear storage before exiting.");
 }
 
 function draw() {

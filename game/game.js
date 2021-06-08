@@ -2,9 +2,12 @@ let lastTimeUpdated = 0;
 let resourceDisplayElements = [];
 let miningButtonElements = [];
 
+let saveSeconds = 0;
+
 function setup()
 {
   if(getItem('globals')!= null) globals = getItem('globals');
+  else globals = defaultItems;
   initExp();
   initMessages();
   logMessage("Welcome to Idle Mining!");
@@ -90,6 +93,8 @@ function draw()
 // this method runs every second
 function OneSecondUpdate()
 {
+  saveSeconds ++;
+  if(saveSeconds % 60 == 0) saveGame();
   // fire slowly burns out
   if(globals.resources.fire.amount > 0) globals.resources.fire.amount --;
   lastTimeUpdated = millis();
@@ -97,6 +102,7 @@ function OneSecondUpdate()
   harvestResources();
   // transform resources
   autoProduceResources();
+
 }
 
 function disableButtons()
@@ -105,4 +111,14 @@ function disableButtons()
   disableProductionButtons();
   disableHarvesterButtons();
   disableAutoProductionButtons();
+}
+
+function goToMods() {
+  storeItem('globals', globals);
+  location.href = "file:///home/me/Desktop/P5%20Offline/game/importMod.html";
+}
+
+function saveGame(){
+  storeItem('globals', globals);
+  logMessage("Game saved! " + month() + "/" + day() + "/" + year() + " at " + hour() + ":" + minute() + ":" + second());
 }
