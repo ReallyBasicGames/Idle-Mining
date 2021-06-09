@@ -258,7 +258,7 @@ function getMod()
           let disText = "<li>" + mods[mods.length-1].modDetails.modName + " made by " + mods[mods.length-1].modDetails.modAuthor + "<br>Mod Description: " + mods[mods.length-1].modDetails.modDiscription + "</li>";
           displayElements.push(createElement('a', disText).id(mods[mods.length-1].modDetails.modName).parent('mods'));
         }
-       else errorElement.html('<b>You already have this mod!</b>');
+       else errorElement.html('<b>You either already have this mod, or another mod is using the same name.</b>');
       }
       catch (e)
       {
