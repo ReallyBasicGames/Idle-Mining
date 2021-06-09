@@ -68,17 +68,17 @@ function produce(id) {
   let prodBuildings = globals.productionBuildings;
   if(Object.keys(globals.productionBuildings).length > 0) {
     let gPC = prodBuildings[id];
-  }
-  // subtract production cost
-  for(var i = 0; i < Object.keys(gPC.productionCost).length; i++)
-  {
-    globals.resources[Object.keys(gPC.productionCost)[i]].amount -= gPC.productionCost[Object.keys(gPC.productionCost)[i]];
-  }
-  // add production
-  for(var i = 0; i < Object.keys(gPC.production).length; i++)
-  {
-    gainXP(round(globals.resources[Object.keys(gPC.productionCost)[i]].xp * gPC.production[Object.keys(gPC.production)[i]] / 4));
-    globals.resources[Object.keys(gPC.production)[i]].amount += gPC.production[Object.keys(gPC.production)[i]];
+    // subtract production cost
+    for(var i = 0; i < Object.keys(gPC.productionCost).length; i++)
+    {
+      globals.resources[Object.keys(gPC.productionCost)[i]].amount -= gPC.productionCost[Object.keys(gPC.productionCost)[i]];
+    }
+    // add production
+    for(var i = 0; i < Object.keys(gPC.production).length; i++)
+    {
+      gainXP(round(globals.resources[Object.keys(gPC.productionCost)[i]].xp * gPC.production[Object.keys(gPC.production)[i]] / 4));
+      globals.resources[Object.keys(gPC.production)[i]].amount += gPC.production[Object.keys(gPC.production)[i]];
+    }
   }
 }
 function productionButtonCreated(id) {
