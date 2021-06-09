@@ -32,39 +32,43 @@ function productionButtonUpdate()
     }
   }
 
-  // update the text of the auto-production buttons
-  for(var j = 0; j < productionButtonElements.length; j++)
-  {
-    var stringToAdd = "";
-    var element = productionButtonElements[j];
-    stringToAdd += "<b>" + globals.productionBuildings[productionButtonElements[j].id()].displayName +"</b><br> Production: <ul>";
-    let product = globals.productionBuildings[productionButtonElements[j].id()].production;
-    for(var c = 0; c < Object.keys(product).length; c++)
+  if(Object.keys(globals.productionBuildings).length > 0) {
+    // update the text of the auto-production buttons
+    for(var j = 0; j < productionButtonElements.length; j++)
     {
-      stringToAdd += "<li>";
-      stringToAdd += product[Object.keys(product)[c]] + " ";
-      stringToAdd += globals.resources[Object.keys(product)[c]].displayName;
-      stringToAdd += "</li>";
+      var stringToAdd = "";
+      var element = productionButtonElements[j];
+      stringToAdd += "<b>" + globals.productionBuildings[productionButtonElements[j].id()].displayName +"</b><br> Production: <ul>";
+      let product = globals.productionBuildings[productionButtonElements[j].id()].production;
+      for(var c = 0; c < Object.keys(product).length; c++)
+      {
+        stringToAdd += "<li>";
+        stringToAdd += product[Object.keys(product)[c]] + " ";
+        stringToAdd += globals.resources[Object.keys(product)[c]].displayName;
+        stringToAdd += "</li>";
+      }
+      stringToAdd += "</ul>";
+      stringToAdd += "Production Cost: <ul>";
+      let cost = globals.productionBuildings[productionButtonElements[j].id()].productionCost;
+      for(var c = 0; c < Object.keys(cost).length; c++)
+      {
+        stringToAdd += "<li>";
+        stringToAdd += cost[Object.keys(cost)[c]] + " ";
+        stringToAdd += globals.resources[Object.keys(cost)[c]].displayName;
+        stringToAdd += "</li>";
+      }
+      stringToAdd += "</ul>";
+      element.html(stringToAdd);
+      element.attribute('title', globals.productionBuildings[productionButtonElements[j].id()].discription);
     }
-    stringToAdd += "</ul>";
-    stringToAdd += "Production Cost: <ul>";
-    let cost = globals.productionBuildings[productionButtonElements[j].id()].productionCost;
-    for(var c = 0; c < Object.keys(cost).length; c++)
-    {
-      stringToAdd += "<li>";
-      stringToAdd += cost[Object.keys(cost)[c]] + " ";
-      stringToAdd += globals.resources[Object.keys(cost)[c]].displayName;
-      stringToAdd += "</li>";
-    }
-    stringToAdd += "</ul>";
-    element.html(stringToAdd);
-    element.attribute('title', globals.productionBuildings[productionButtonElements[j].id()].discription);
   }
 }
 
 function produce(id) {
   let prodBuildings = globals.productionBuildings;
-  let gPC = prodBuildings[id];
+  if(Object.keys(globals.productionBuildings).length > 0) {
+    let gPC = prodBuildings[id];
+  }
   // subtract production cost
   for(var i = 0; i < Object.keys(gPC.productionCost).length; i++)
   {

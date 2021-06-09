@@ -96,7 +96,7 @@ function OneSecondUpdate()
   saveSeconds ++;
   if(saveSeconds % 60 == 0) saveGame();
   // fire slowly burns out
-  if(globals.resources.fire.amount > 0) globals.resources.fire.amount --;
+  if(globals.resources.fire != null) if(globals.resources.fire.amount > 0) globals.resources.fire.amount --;
   lastTimeUpdated = millis();
   // collect resources every second.
   harvestResources();
