@@ -1,7 +1,7 @@
 let defMod = {
   "modDetails": {
     "modName": "Default Mod",
-    "modDiscription": "The default mod.",
+    "modDiscription": "The default mod. Inlcludes 6 basic resources, as well as various production buildings, harvesters, and auto-production buildings.",
     "modAuthor": "Really Basic Games",
     "enabled": false,
     "dependencies": [null]
