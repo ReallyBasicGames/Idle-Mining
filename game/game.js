@@ -6,6 +6,8 @@ let saveSeconds = 0;
 
 function setup()
 {
+  document.getElementById("gameTitle").innerHTML = "IDLE MINING DESKTOP V " + versionNum;
+  document.getElementById("gameTitleTwo").innerHTML = "IDLE MINING DESKTOP V " + versionNum;
   if(getItem('globals')!= null) globals = getItem('globals');
   else globals = defaultItems;
   initExp();

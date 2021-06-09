@@ -1,3 +1,4 @@
+let versionNum = "1.2";
 let globals;
 let defaultItems =  {
   "researchUnlocked": false,
@@ -10,7 +11,7 @@ let defaultItems =  {
     "ResearchPoints": 0
   },
   "resources": {
-    
+
   },
   "productionBuildings": {
 
