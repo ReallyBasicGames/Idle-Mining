@@ -17,6 +17,9 @@ let clearStorageButton;
 
 let modWasRemoved = false;
 
+let toggleDesktop;
+let onDesktop = true;
+
 function setup()
 {
   if(location.href == "file:///home/me/Desktop/P5%20Offline/game/importMod.html") {
