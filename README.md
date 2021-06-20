@@ -25,6 +25,9 @@ To import a mod:
 3. Upon loading the game, while in the modding room select 'load mod'
 4. Select the 'mod.json' file
 
-You mod should be loaded at this point! If it isn't, contact the owner of the mod (it has to do with an issue with their mod, not this game).
+Your mod should be loaded at this point! If it isn't, contact the owner of the mod (it has to do with an issue with their mod, not this game).
 
-To play with you mod, simply press the button 'Back to Game' and the mod should be ready.
+To play with your mod, simply press the button 'Back to Game' and the mod should be ready.
+
+#### Bug Reports
+If you have any issues, please post them under 'issues' on [github](https://github.com/ReallyBasicGames/Idle-Mining/issues).

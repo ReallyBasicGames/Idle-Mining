@@ -17,13 +17,13 @@ let clearStorageButton;
 
 let modWasRemoved = false;
 
-let toggleDesktop;
-let onDesktop = true;
-
 function setup()
 {
-  if(location.href == "file:///home/me/Desktop/P5%20Offline/game/importMod.html") {
     if(getItem('globals')!= null) globals = getItem('globals');
+    else {
+      globals = defaultItems;
+      storeItem('globals', globals);
+    }
     if(getItem('mods')!= null) mods = getItem('mods');
     homeScreenButton = createButton("Exit to Game");
     homeScreenButton.class("ModButton");
@@ -46,7 +46,7 @@ function setup()
     defaultMod.parent("input");
     defaultMod.class("ModButton");
     defaultMod.mousePressed(() => {
-      loadDefaultMod();
+        loadDefaultMod();
     });
     createElement('a', '<br>').parent("input");
     createElement('a', '<br>').parent("input");
@@ -60,17 +60,16 @@ function setup()
     removeModElement.parent("input");
     removeModElement.class("ModButton");
     removeModElement.mousePressed(() => {
-      removeMod(removeModInput.value());
+        removeMod(removeModInput.value());
     });
     let removeAllModsElement = createButton("DELETE ALL MODS");
     removeAllModsElement.parent("input");
     removeAllModsElement.class("ModButton");
     removeAllModsElement.mousePressed(() => {
-      removeAllMods();
+        removeAllMods();
     });
 
     reloadMods();
-  }
 }
 
 function reloadMods()
@@ -124,7 +123,12 @@ function home()
     storeItem('mods', mods);
     storeItem('globals', globals);
     // go to game.html
-    location.href = "file:///home/me/Desktop/P5%20Offline/game/game.html";
+    if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+      location.href = "file:///home/me/Desktop/P5%20Offline/game/game.html";
+    }
+    else {
+      location.href = "game.html";
+    }
   } catch (e) {
     errorElement.html("<b>Encountered an error while combining:<br>" + e + "</b>");
   }
