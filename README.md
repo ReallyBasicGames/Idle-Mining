@@ -31,3 +31,7 @@ To play with your mod, simply press the button 'Back to Game' and the mod should
 
 #### Bug Reports
 If you have any issues, please post them under 'issues' on [github](https://github.com/ReallyBasicGames/Idle-Mining/issues).
+
+License:
+![88x31](https://user-images.githubusercontent.com/66337133/160225749-966e5561-a1e4-450d-9d2c-a20a4a717877.png)
+https://creativecommons.org/licenses/by-nc/4.0/
