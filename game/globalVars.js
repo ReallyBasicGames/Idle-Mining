@@ -1,5 +1,8 @@
 let versionNum = "1.2";
 let globals;
+
+let firstTime;
+
 let defaultItems =  {
   "researchUnlocked": false,
   "clickMulti": 1,

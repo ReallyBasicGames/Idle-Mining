@@ -70,6 +70,14 @@ function setup()
     });
 
     reloadMods();
+  if(mods.length == 0) {
+    loadDefaultMod();
+    reloadMods();
+    clearThisStorage();
+    firstTime = false;
+    home();
+    console.log("going home");
+  }
 }
 
 function reloadMods()
